@@ -1,5 +1,7 @@
 <template>
-  <div class="md:w-64 lg:w-72 bg-gray-100 flex flex-col h-full shadow-md">
+  <div
+    class="md:w-64 lg:w-72 bg-gray-100 flex flex-col h-full overflow-auto overflow-x-hidden shadow-md pb-20"
+  >
     <!-- dashboard -->
     <router-link to="/" class="aside-list-style">
       <!-- logo  -->
