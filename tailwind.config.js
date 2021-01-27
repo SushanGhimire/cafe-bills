@@ -12,6 +12,7 @@ module.exports = {
       },
       fontFamily: {
         roboto: ["Roboto"],
+        fira: ["Fira Sans Condensed"],
       },
     },
   },

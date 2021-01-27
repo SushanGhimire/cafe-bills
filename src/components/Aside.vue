@@ -1,13 +1,13 @@
 <template>
   <div
-    class="md:w-64 lg:w-72 bg-gray-100 flex flex-col h-full overflow-auto overflow-x-hidden shadow-md pb-20"
+    class="md:w-64 lg:w-72 bg-gray-100 border-r flex flex-col h-full overflow-auto overflow-x-hidden shadow-md pb-20"
   >
     <!-- dashboard -->
     <router-link to="/" class="aside-list-style">
       <!-- logo  -->
       <div>
         <svg
-          class="lg:w-8 lg:h-8 w-5 h-5"
+          class="lg:w-6 lg:h-6 w-5 h-5"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -34,11 +34,11 @@
       <p class="ml-10">Manager List</p>
     </div>
     <!-- category -->
-    <router-link to="Category" class="aside-list-style bg-gray-300">
+    <router-link to="Category" class="aside-list-style">
       <!-- logo  -->
       <div>
         <svg
-          class="w-5 lg:w-8 h-5 lg:h-8"
+          class="w-5 lg:w-6 h-5 lg:h-6"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -55,11 +55,11 @@
       <p class="font-medium text-lg lg:text-xl">Categories</p>
     </router-link>
     <!-- Products -->
-    <router-link to="Products" class="aside-list-style bg-gray-300">
+    <router-link to="Products" class="aside-list-style">
       <!-- logo  -->
       <div>
         <svg
-          class="w-5 lg:w-8 h-5 lg:h-8"
+          class="w-5 lg:w-6 h-5 lg:h-6"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -80,11 +80,11 @@
       <p class="ml-10">Report</p>
     </div>
     <!-- sales report -->
-    <router-link to="SalesReport" class="aside-list-style bg-gray-300">
+    <router-link to="SalesReport" class="aside-list-style">
       <!-- logo  -->
       <div>
         <svg
-          class="w-5 lg:w-8 h-5 lg:h-8"
+          class="w-5 lg:w-6 h-5 lg:h-6"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -105,11 +105,11 @@
       <p class="ml-10">Systems</p>
     </div>
     <!-- Users -->
-    <router-link to="Users" class="aside-list-style bg-gray-300">
+    <router-link to="Users" class="aside-list-style">
       <!-- logo  -->
       <div>
         <svg
-          class="w-5 lg:w-8 h-5 lg:h-8"
+          class="w-5 lg:w-6 h-5 lg:h-6"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

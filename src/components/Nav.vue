@@ -2,15 +2,16 @@
   <div
     class="w-full flex items-center justify-between bg-chulho px-10 py-2 font-roboto"
   >
-    <div
+    <router-link
+      to="/"
       class="text-white py-3 shadow-lg text-lg lg:text-2xl font-semibold tracking-widest"
     >
       CHULHO
-    </div>
-    <div class="flex space-x-1 items-center">
+    </router-link>
+    <div class="flex space-x-1 items-center cursor-pointer">
       <div class="text-white text-xl lg:text-2xl">Waiter</div>
       <svg
-        class="w-5 lg:-6 h-5 lg:h-6 text-white"
+        class="w-5 lg:w-7 h-5 lg:h-7 text-white"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
