@@ -34,7 +34,6 @@ export default {
   methods: {
     closeNavAside() {
       this.isAside = false;
-      this.isNav = false;
     },
   },
 };
