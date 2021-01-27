@@ -1,12 +1,15 @@
 <template>
   <div class="w-screen h-screen overflow-y-hidden flex flex-col font-fira">
-    <Nav />
+    <Nav v-if="isNav" />
     <div class="w-full flex h-full">
-      <Aside />
+      <Aside v-if="isAside" />
       <div class="flex-1 flex">
         <router-view v-slot="slotprops">
           <transition name="route" mode="out-in">
-            <component :is="slotprops.Component"></component>
+            <component
+              :is="slotprops.Component"
+              @close-nav-aside="closeNavAside"
+            ></component>
           </transition>
         </router-view>
       </div>
@@ -21,6 +24,18 @@ export default {
   components: {
     Nav,
     Aside,
+  },
+  data() {
+    return {
+      isAside: true,
+      isNav: true,
+    };
+  },
+  methods: {
+    closeNavAside() {
+      this.isAside = false;
+      this.isNav = false;
+    },
   },
 };
 </script>

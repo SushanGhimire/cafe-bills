@@ -113,10 +113,10 @@
     <!-- category form  -->
     <div class="w-full lg:w-96">
       <form method="post" class="w-full flex flex-col bg-white shadow-md">
-        <div class="w-full flex bg-gray-100 py-3 border-b border-gray-300">
-          <p class="mx-auto text-xl font-medium text-gray-700 mb-2">
-            Category Form
-          </p>
+        <div
+          class="w-full flex bg-chulho text-white py-3 border-b border-gray-300"
+        >
+          <p class="mx-auto text-xl font-medium mb-2">Category Form</p>
         </div>
         <!-- name  -->
         <div class="w-full flex flex-col px-6 mt-4">
@@ -159,8 +159,10 @@
     <!-- cajtegory list  -->
     <div class="w-full lg:flex-1 h-full overflow-auto pb-12 mt-10 lg:mt-0">
       <section class="w-full flex flex-col bg-white shadow-md">
-        <div class="w-full flex bg-gray-100 py-3 border-b border-gray-300 px-5">
-          <p class="text-xl font-medium text-gray-700 mb-2">Category List</p>
+        <div
+          class="w-full flex bg-chulho text-white py-3 border-b border-gray-300 px-5"
+        >
+          <p class="text-xl font-medium mb-2">Category List</p>
         </div>
         <!-- search  -->
         <div class="flex px-5 py-4 items-center space-x-4">
