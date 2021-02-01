@@ -3,7 +3,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  mounted() {
+    this.$emit("close-nav-aside");
+  },
+};
 </script>
 
 <style>

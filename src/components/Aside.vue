@@ -3,7 +3,9 @@
     class="md:w-64 lg:w-72 bg-gray-100 border-r flex flex-col h-full overflow-auto overflow-x-hidden shadow-md pb-20"
   >
     <!-- dashboard -->
-    <router-link to="/" class="aside-list-style">
+    <div
+      class="flex text-gray-800 hover:shadow-md px-4 py-3 items-center space-x-3 cursor-pointer border-b bg-gray-200"
+    >
       <!-- logo  -->
       <div>
         <svg
@@ -28,7 +30,7 @@
         </svg>
       </div>
       <p class="font-medium text-lg lg:text-xl">Dashboard</p>
-    </router-link>
+    </div>
     <!-- manager list -->
     <div class="bg-chulho text-white py-1 lg:py-2 text-lg">
       <p class="ml-10">Manager List</p>

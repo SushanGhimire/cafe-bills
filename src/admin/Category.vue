@@ -35,7 +35,7 @@
                 Cancel
               </button>
               <button
-                @click="deleteRecord(deleteDataId)"
+                @click="deleteRecord(deleteId)"
                 class="bg-red-500 text-gray-200 rounded hover:bg-red-400 px-6 py-2 focus:outline-none mx-1"
               >
                 Delete
@@ -63,7 +63,7 @@
           >
             <div class="w-full flex bg-gray-100 py-3 border-b border-gray-300">
               <p class="mx-auto text-xl font-medium text-gray-700 mb-2">
-                Category Form
+                Update Product Type
               </p>
             </div>
             <!-- name  -->
@@ -72,32 +72,39 @@
                 >Name</label
               >
               <input
+                v-model="UpdateData.name"
                 type="text"
                 class="border p-2 lg:p-3 focus:outline-none focus:border-chulho"
               />
             </div>
-            <!-- Description  -->
+            <!-- Category -->
             <div class="w-full flex flex-col px-6 mt-4">
               <label for="" class="text-xl font-medium text-gray-700 mb-2"
-                >Description</label
+                >Category</label
               >
-              <textarea
+              <select
                 name=""
                 id=""
-                cols="30"
-                rows="5"
-                class="border px-5"
-              ></textarea>
+                class="border px-3 py-4 focus:outline-none bg-white"
+                v-model="UpdateData.flag"
+              >
+                <option value="" selected="" disabled="" class="">
+                  ---Select Product Category---
+                </option>
+                <option value="0">Kitchen</option>
+                <option value="1">Bar</option>
+              </select>
             </div>
             <div class="flex justify-center space-x-8 py-5">
               <button
+                @click="updateRecord(updateId)"
                 type="submit"
                 class="bg-blue-500 text-white py-2 px-6 text-xl hover:bg-blue-600"
               >
-                Save
+                Update
               </button>
               <button
-                @click="editCategory"
+                @click="CloseCategory()"
                 class="bg-red-600 text-white py-2 px-6 text-xl hover:bg-red-700"
               >
                 Cancel
@@ -112,11 +119,15 @@
     </div>
     <!-- category form  -->
     <div class="w-full lg:w-96">
-      <form method="post" class="w-full flex flex-col bg-white shadow-md">
+      <form
+        method="post"
+        class="w-full flex flex-col bg-white shadow-md"
+        @submit.prevent=""
+      >
         <div
           class="w-full flex bg-chulho text-white py-3 border-b border-gray-300"
         >
-          <p class="mx-auto text-xl font-medium mb-2">Category Form</p>
+          <p class="mx-auto text-xl font-medium mb-2">Product Type Form</p>
         </div>
         <!-- name  -->
         <div class="w-full flex flex-col px-6 mt-4">
@@ -124,31 +135,39 @@
             >Name</label
           >
           <input
+            v-model="CategoryData.name"
             type="text"
             class="border p-2 lg:p-3 focus:outline-none focus:border-chulho"
           />
         </div>
-        <!-- Description  -->
+        <!-- Category -->
         <div class="w-full flex flex-col px-6 mt-4">
           <label for="" class="text-xl font-medium text-gray-700 mb-2"
-            >Description</label
+            >Category</label
           >
-          <textarea
+          <select
             name=""
             id=""
-            cols="30"
-            rows="5"
-            class="border px-5"
-          ></textarea>
+            class="border px-3 py-4 focus:outline-none bg-white"
+            v-model="CategoryData.flag"
+          >
+            <option value="" selected="" disabled="" class="">
+              ---Select Product Category---
+            </option>
+            <option value="0">Kitchen</option>
+            <option value="1">Bar</option>
+          </select>
         </div>
         <div class="flex justify-center space-x-8 py-5">
           <button
             type="submit"
+            @click="SubmitData"
             class="bg-blue-500 text-white py-2 px-6 text-xl hover:bg-blue-600"
           >
             Save
           </button>
           <button
+            @click="CancelData"
             class="bg-red-600 text-white py-2 px-6 text-xl hover:bg-red-700"
           >
             Cancel
@@ -162,7 +181,7 @@
         <div
           class="w-full flex bg-chulho text-white py-3 border-b border-gray-300 px-5"
         >
-          <p class="text-xl font-medium mb-2">Category List</p>
+          <p class="text-xl font-medium mb-2">Product Type List</p>
         </div>
         <!-- search  -->
         <div class="flex px-5 py-4 items-center space-x-4">
@@ -183,26 +202,34 @@
             <thead>
               <tr class="bg-chulho lg:text-xl text-white">
                 <th class="w-16 lg:w-24 py-3">SN</th>
-                <th class="py-3">Category Information</th>
+                <th class="py-3">Product Type Information</th>
                 <th class="py-3">Action</th>
               </tr>
             </thead>
             <tbody class="divide-y">
-              <tr v-for="i in 10" :key="i" class="divide-x">
-                <td class="text-center text-lg py-2">{{ i }}</td>
+              <tr
+                v-for="(Product, index) in ProductTable"
+                :key="index"
+                class="divide-x"
+              >
+                <td class="text-center text-lg py-2">{{ index + 1 }}</td>
                 <td class="flex flex-col lg:text-lg py-2 pl-4">
-                  <div class="flex mt-2 space-x-4">
+                  <!-- <div class="flex mt-2 space-x-4">
                     <label for="">Name:</label>
-                    <label for="" class="font-bold">Meal</label>
+                    <label for="" class="font-bold"> {{ Product.name }}</label>
                   </div>
                   <div class="flex space-x-4">
-                    <label for="">Description:</label>
-                    <label for="" class="font-bold">Mitho xa</label>
-                  </div>
+                    <label for="">Category:</label>
+                    <label for="" class="font-bold">{{ Product.flag }}</label>
+                  </div> -->
+                  {{ Product.name }}
                 </td>
                 <td class="text-center text-lg py-2 pl-3">
                   <div class="flex space-x-4 items-center">
-                    <span class="flex lg:hidden" @click="editCategory">
+                    <span
+                      class="flex lg:hidden"
+                      @click="editCategory(Product.id)"
+                    >
                       <svg
                         class="w-6 h-6 text-blue-500"
                         fill="none"
@@ -219,12 +246,15 @@
                       </svg>
                     </span>
                     <button
-                      @click="editCategory"
+                      @click="editCategory(Product.id)"
                       class="hidden lg:flex bg-blue-500 text-white py-2 px-6 text-xl hover:bg-blue-600"
                     >
                       Edit
                     </button>
-                    <span class="flex lg:hidden" @click="closedelete">
+                    <span
+                      class="flex lg:hidden"
+                      @click="closedelete(Product.id)"
+                    >
                       <svg
                         class="w-6 h-6 text-red-600"
                         fill="none"
@@ -241,7 +271,7 @@
                       </svg>
                     </span>
                     <button
-                      @click="closedelete"
+                      @click="closedelete(Product.id)"
                       class="hidden lg:flex bg-red-600 text-white py-2 px-6 text-xl hover:bg-red-700"
                     >
                       Delete
@@ -258,19 +288,93 @@
 </template>
 
 <script>
+import axios from "../axios/index";
 export default {
   components: {},
   data() {
     return {
       isEdit: false,
       isDelete: false,
+      CategoryData: {
+        flag: "",
+        name: "",
+      },
+      UpdateData: [],
+      ProductTable: [],
+      deleteId: "",
+      updateId: "",
     };
   },
+  mounted() {
+    this.ProductList();
+  },
   methods: {
-    closedelete() {
+    ProductList() {
+      axios
+        .get("api/productType/viewAllProductType")
+        .then(async (res) => {
+          this.ProductTable = await res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    CancelData() {
+      this.CategoryData.name = "";
+      this.CategoryData.flag = "";
+    },
+    SubmitData() {
+      axios
+        .post("api/productType/saveProductType", this.CategoryData)
+        .then((res) => {
+          console.log(res);
+          this.ProductList();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    deleteRecord(data) {
+      axios
+        .delete("api/productType/deleteProductTypeById/" + data)
+        .then((res) => {
+          console.log(res);
+          this.isDelete = !this.isDelete;
+          this.ProductList();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    updateRecord(data) {
+      axios
+        .put("api/productType/deleteProductTypeById/" + data, this.UpdateData)
+        .then((res) => {
+          console.log(res);
+          this.isDelete = !this.isDelete;
+          this.ProductList();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    closedelete(data) {
+      this.deleteId = data;
       this.isDelete = !this.isDelete;
     },
-    editCategory() {
+    editCategory(data) {
+      axios
+        .get("api/productType/viewProductTypeById/" + data)
+        .then(async (res) => {
+          this.UpdateData = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      this.isEdit = !this.isEdit;
+      this.updateId = data;
+    },
+    CloseCategory() {
       this.isEdit = !this.isEdit;
     },
   },

@@ -70,14 +70,14 @@
               <select
                 name=""
                 id=""
-                class="border px-3 py-4 focus:outline-none focus:border-chulho bg-white"
+                class="border px-3 py-4 focus:outline-none bg-white"
+                v-model="UpdateData.productType"
               >
-                <option value="" selected="" disabled="">
-                  --- Select Category ---
+                <option value="" selected="" disabled="" class="">
+                  ---Select Product Category---
                 </option>
-                <option value="">Meal</option>
-                <option value="">Food</option>
-                <option value="">Liquid</option>
+                <option value="0">Kitchen</option>
+                <option value="1">Bar</option>
               </select>
             </div>
             <!-- name  -->
@@ -86,6 +86,7 @@
                 >Name</label
               >
               <input
+                v-model="UpdateData.name"
                 type="text"
                 class="border p-2 lg:p-3 focus:outline-none focus:border-chulho"
               />
@@ -96,6 +97,7 @@
                 >Description</label
               >
               <textarea
+                v-model="UpdateData.productDescription"
                 name=""
                 id=""
                 cols="30"
@@ -103,12 +105,32 @@
                 class="border px-5"
               ></textarea>
             </div>
+            <!-- quantity flag  -->
+            <div class="w-full flex flex-col px-6 mt-4">
+              <label for="" class="text-xl font-medium text-gray-700 mb-2"
+                >Product Quantity</label
+              >
+              <select
+                name=""
+                id=""
+                class="border px-3 py-4 focus:outline-none bg-white"
+                v-model="UpdateData.quantityFlag"
+              >
+                <option value="" selected="" disabled="" class="">
+                  ---Select Product Quantity---
+                </option>
+                <option value="0">Full</option>
+                <option value="1">Half</option>
+                <option value="2">Quater</option>
+              </select>
+            </div>
             <!-- price  -->
             <div class="w-full flex flex-col px-6 mt-4">
               <label for="" class="text-xl font-medium text-gray-700 mb-2"
                 >Price</label
               >
               <input
+                v-model="UpdateData.price"
                 type="number"
                 class="border p-2 lg:p-3 focus:outline-none focus:border-chulho"
               />
@@ -136,7 +158,11 @@
     </div>
     <!-- product form  -->
     <div class="w-full lg:w-96">
-      <form method="post" class="w-full flex flex-col bg-white shadow-md">
+      <form
+        method="post"
+        class="w-full flex flex-col bg-white shadow-md"
+        @submit.prevent=""
+      >
         <div
           class="w-full flex bg-chulho text-white py-3 border-b border-gray-300"
         >
@@ -150,14 +176,14 @@
           <select
             name=""
             id=""
-            class="border px-3 py-4 focus:outline-none focus:border-chulho bg-white"
+            class="border px-3 py-4 focus:outline-none bg-white"
+            v-model="ProductData.productType"
           >
-            <option value="" selected="" disabled="">
-              --- Select Category ---
+            <option value="" selected="" disabled="" class="">
+              ---Select Product Category---
             </option>
-            <option value="">Meal</option>
-            <option value="">Food</option>
-            <option value="">Liquid</option>
+            <option value="Kitchen">Kitchen</option>
+            <option value="Bar">Bar</option>
           </select>
         </div>
         <!-- name  -->
@@ -166,6 +192,7 @@
             >Name</label
           >
           <input
+            v-model="ProductData.name"
             type="text"
             class="border p-2 lg:p-3 focus:outline-none focus:border-chulho"
           />
@@ -176,6 +203,7 @@
             >Description</label
           >
           <textarea
+            v-model="ProductData.productDescription"
             name=""
             id=""
             cols="30"
@@ -183,24 +211,46 @@
             class="border px-5"
           ></textarea>
         </div>
+        <!-- quantity flag  -->
+        <div class="w-full flex flex-col px-6 mt-4">
+          <label for="" class="text-xl font-medium text-gray-700 mb-2"
+            >Product Quantity</label
+          >
+          <select
+            name=""
+            id=""
+            class="border px-3 py-4 focus:outline-none bg-white"
+            v-model="ProductData.quantityFlag"
+          >
+            <option value="" selected="" disabled="" class="">
+              ---Select Product Quantity---
+            </option>
+            <option value="0">Full</option>
+            <option value="1">Half</option>
+            <option value="2">Quater</option>
+          </select>
+        </div>
         <!-- price  -->
         <div class="w-full flex flex-col px-6 mt-4">
           <label for="" class="text-xl font-medium text-gray-700 mb-2"
             >Price</label
           >
           <input
+            v-model="ProductData.price"
             type="number"
             class="border p-2 lg:p-3 focus:outline-none focus:border-chulho"
           />
         </div>
         <div class="flex justify-center space-x-8 py-5">
           <button
+            @click="SubmitData"
             type="submit"
             class="bg-blue-500 text-white py-2 px-6 text-xl hover:bg-blue-600"
           >
             Save
           </button>
           <button
+            @click="CancelData"
             class="bg-red-600 text-white py-2 px-6 text-xl hover:bg-red-700"
           >
             Cancel
@@ -214,7 +264,7 @@
         <div
           class="w-full flex bg-chulho text-white py-3 border-b border-gray-300 px-5"
         >
-          <p class="text-xl font-medium mb-2">Product List</p>
+          <p class="text-xl font-medium mb-2">Product Type List</p>
         </div>
         <!-- search  -->
         <div class="flex px-5 py-4 items-center space-x-4">
@@ -234,29 +284,36 @@
           <table class="table-auto w-full border">
             <thead>
               <tr class="bg-chulho lg:text-xl text-white">
-                <th class="w-16 lg:w-24 py-3">SN</th>
-                <th class="w-16 lg:w-24 py-3">Category</th>
-                <th class="py-3">Product Info</th>
+                <th class="lg:w-24 py-3">SN</th>
+                <th class="lg:w-24 py-3">Category</th>
+                <th class="py-3">Product Information</th>
                 <th class="py-3">Action</th>
               </tr>
             </thead>
-            <tbody class="text-sm lg:text-lg divide-y">
-              <tr v-for="i in 10" :key="i" class="divide-x">
-                <td class="text-center py-2">{{ i }}</td>
-                <td class="text-center py-2 font-bold">Meal</td>
-                <td class="flex flex-col py-2 pl-4">
+            <tbody class="divide-y">
+              <tr v-for="(Product, index) in 4" :key="index" class="divide-x">
+                <td class="text-center text-lg py-2">{{ index + 1 }}</td>
+                <td class="text-center text-lg py-2">Category</td>
+                <td class="flex flex-col lg:text-lg py-2 pl-4">
                   <div class="flex mt-2 space-x-4">
                     <label for="">Name:</label>
-                    <label for="" class="font-bold">Meal</label>
+                    <label for="" class="font-bold"> {{ Product.name }}</label>
                   </div>
                   <div class="flex space-x-4">
                     <label for="">Description:</label>
-                    <label for="" class="font-bold">Mitho xa</label>
+                    <label for="" class="font-bold">{{ Product.flag }}</label>
+                  </div>
+                  <div class="flex space-x-4">
+                    <label for="">Price:</label>
+                    <label for="" class="font-bold">{{ Product.flag }}</label>
                   </div>
                 </td>
-                <td class="text-center py-2 pl-3">
+                <td class="text-center text-lg py-2 pl-3">
                   <div class="flex space-x-4 items-center">
-                    <span class="flex lg:hidden" @click="editProduct">
+                    <span
+                      class="flex lg:hidden"
+                      @click="editProduct(Product.id)"
+                    >
                       <svg
                         class="w-6 h-6 text-blue-500"
                         fill="none"
@@ -273,12 +330,15 @@
                       </svg>
                     </span>
                     <button
-                      @click="editProduct"
+                      @click="editProduct(Product.id)"
                       class="hidden lg:flex bg-blue-500 text-white py-2 px-6 text-xl hover:bg-blue-600"
                     >
                       Edit
                     </button>
-                    <span class="flex lg:hidden" @click="closedelete">
+                    <span
+                      class="flex lg:hidden"
+                      @click="closedelete(Product.id)"
+                    >
                       <svg
                         class="w-6 h-6 text-red-600"
                         fill="none"
@@ -295,7 +355,7 @@
                       </svg>
                     </span>
                     <button
-                      @click="closedelete"
+                      @click="closedelete(Product.id)"
                       class="hidden lg:flex bg-red-600 text-white py-2 px-6 text-xl hover:bg-red-700"
                     >
                       Delete
@@ -312,18 +372,104 @@
 </template>
 
 <script>
+import axios from "../axios/index";
 export default {
   data() {
     return {
       isEdit: false,
       isDelete: false,
+      ProductData: {
+        flag: "",
+        name: "",
+        price: "",
+        productDescription: "",
+        quantityFlag: "",
+        quantityFull: "",
+        quantityHalf: "",
+        quantityQuater: "",
+      },
+      UpdateData: [],
+      ProductTable: [],
+      deleteId: "",
+      updateId: "",
     };
   },
+  mounted() {
+    this.ProductList();
+  },
   methods: {
-    closedelete() {
+    ProductList() {
+      axios
+        .get("api/product/viewAllProduct")
+        .then(async (res) => {
+          this.ProductTable = await res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    CancelData() {
+      this.ProductData.flag = "";
+      this.ProductData.name = "";
+      this.ProductData.price = "";
+      this.ProductData.productDescription = "";
+      this.ProductData.quantityFlag = "";
+      this.ProductData.quantityFull = "";
+      this.ProductData.quantityHalf = "";
+      this.ProductData.quantityQuater = "";
+    },
+    SubmitData() {
+      axios
+        .post("api/product/saveProduct", this.ProductData)
+        .then((res) => {
+          console.log(res);
+          this.ProductList();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    deleteRecord(data) {
+      axios
+        .delete("api/product/deleteProductById/" + data)
+        .then((res) => {
+          console.log(res);
+          this.isDelete = !this.isDelete;
+          this.ProductList();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    updateRecord(data) {
+      axios
+        .put("api/product/updateProductById/" + data, this.UpdateData)
+        .then((res) => {
+          console.log(res);
+          this.isDelete = !this.isDelete;
+          this.ProductList();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    closedelete(data) {
+      this.deleteId = data;
       this.isDelete = !this.isDelete;
     },
-    editProduct() {
+    editProduct(data) {
+      axios
+        .get("api/product/viewProductById/" + data)
+        .then(async (res) => {
+          this.UpdateData = await res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      this.isEdit = !this.isEdit;
+      this.updateId = data;
+    },
+    CloseProduct() {
       this.isEdit = !this.isEdit;
     },
   },
